@@ -11,7 +11,9 @@ import torch.nn as nn
 from torch.optim.lr_scheduler import LambdaLR
 from tqdm import trange
 
-from pytorch_pretrained_bert import BertForTokenClassification
+# from pytorch_pretrained_bert import BertForTokenClassification // very old lib. will not work perfectly
+
+from transformers import BertForTokenClassification
 
 from data_loader import DataLoader
 from evaluate import evaluate
@@ -19,9 +21,9 @@ import utils
 
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--data_dir', default='data/task1', help="Directory containing the dataset")
-parser.add_argument('--bert_model_dir', default='bert-base-uncased-pytorch', help="Directory containing the BERT model in PyTorch")
-parser.add_argument('--model_dir', default='experiments/base_model', help="Directory containing params.json")
+parser.add_argument('--data_dir', default='./drive/My Drive/Colab Notebooks/BERT-keyphrase-extraction/data/task1', help="Directory containing the dataset")
+parser.add_argument('--bert_model_dir', default='bert-base-uncased', help="Directory containing the BERT model in PyTorch")
+parser.add_argument('--model_dir', default='./drive/My Drive/Colab Notebooks/BERT-keyphrase-extraction/experiments/base_model', help="Directory containing params.json")
 parser.add_argument('--seed', type=int, default=2019, help="random seed for initialization")
 parser.add_argument('--restore_file', default=None,
                     help="Optional, name of the file in --model_dir containing weights to reload before training")
@@ -37,7 +39,7 @@ def train(model, data_iterator, optimizer, scheduler, params):
     """Train the model on `steps` batches"""
     # set model to training mode
     model.train()
-    scheduler.step()
+    # scheduler.step() // method cause error
 
     # a running average object for loss
     loss_avg = utils.RunningAverage()
@@ -50,7 +52,10 @@ def train(model, data_iterator, optimizer, scheduler, params):
         batch_masks = batch_data.gt(0)
 
         # compute model output and loss
-        loss = model(batch_data, token_type_ids=None, attention_mask=batch_masks, labels=batch_tags)
+        
+        # loss = model(batch_data, token_type_ids=None, attention_mask=batch_masks, labels=batch_tags) it will not work anymore, here is the issue: https://github.com/huggingface/transformers/issues/82
+        
+        loss, _ = model(batch_data, token_type_ids=None, attention_mask=batch_masks, labels=batch_tags)
 
         if params.n_gpu > 1 and args.multi_gpu:
             loss = loss.mean()  # mean() to average on multi-gpu
@@ -71,6 +76,8 @@ def train(model, data_iterator, optimizer, scheduler, params):
         # update the average loss
         loss_avg.update(loss.item())
         t.set_postfix(loss='{:05.3f}'.format(loss_avg()))
+    
+    scheduler.step() # readd step
     
 
 def train_and_evaluate(model, train_data, val_data, optimizer, scheduler, params, model_dir, restore_file=None):

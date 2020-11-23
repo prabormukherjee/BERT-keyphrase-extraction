@@ -7,7 +7,9 @@ import sys
 
 import torch
 
-from pytorch_pretrained_bert import BertTokenizer
+# from pytorch_pretrained_bert import BertTokenizer // very old lib. will not work perfectly
+
+from transformers import BertTokenizer
 
 import utils
 
@@ -44,7 +46,7 @@ class DataLoader(object):
         sentences = []
         tags = []
 
-        with open(sentences_file, 'r') as file:
+        with open(sentences_file, 'r', encoding='utf-8') as file:
             for line in file:
                 # replace each token by its index
                 tokens = line.split()

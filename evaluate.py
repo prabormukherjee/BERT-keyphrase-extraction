@@ -8,7 +8,9 @@ import os
 import numpy as np
 import torch
 
-from pytorch_pretrained_bert import BertForTokenClassification, BertConfig
+# from pytorch_pretrained_bert import BertForTokenClassification, BertConfig
+
+from transformers import BertForTokenClassification, BertConfig
 
 from metrics import f1_score
 from metrics import classification_report
@@ -17,16 +19,16 @@ from data_loader import DataLoader
 import utils
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--data_dir', default='data/msra/', help="Directory containing the dataset")
-parser.add_argument('--bert_model_dir', default='bert-base-chinese-pytorch', help="Directory containing the BERT model in PyTorch")
-parser.add_argument('--model_dir', default='experiments/base_model', help="Directory containing params.json")
+parser.add_argument('--data_dir', default='./drive/My Drive/Colab Notebooks/BERT-keyphrase-extraction/data/msra/', help="Directory containing the dataset")
+parser.add_argument('--bert_model_dir', default='bert-base-chinese', help="Directory containing the BERT model in PyTorch")
+parser.add_argument('--model_dir', default='./drive/My Drive/Colab Notebooks/BERT-keyphrase-extraction/experiments/base_model', help="Directory containing params.json")
 parser.add_argument('--seed', type=int, default=23, help="random seed for initialization")
 parser.add_argument('--restore_file', default='best', help="name of the file in `model_dir` containing weights to load")
 parser.add_argument('--multi_gpu', default=False, action='store_true', help="Whether to use multiple GPUs if available")
 parser.add_argument('--fp16', default=False, action='store_true', help="Whether to use 16-bit float precision instead of 32-bit")
 
 
-def evaluate(model, data_iterator, params, mark='Eval', verbose=False):
+def evaluate(model, data_iterator, params, mark='Test', verbose=False):
     """Evaluate the model on `steps` batches."""
     # set model to evaluation mode
     model.eval()
@@ -44,12 +46,18 @@ def evaluate(model, data_iterator, params, mark='Eval', verbose=False):
         batch_data, batch_tags = next(data_iterator)
         batch_masks = batch_data.gt(0)
 
+        # loss = mmodel(batch_data, token_type_ids=None, attention_mask=batch_masks, labels=batch_tags) it will not work anymore, here is the issue: https://github.com/huggingface/transformers/issues/82
+        
         loss = model(batch_data, token_type_ids=None, attention_mask=batch_masks, labels=batch_tags)
+        loss = loss[0]
         if params.n_gpu > 1 and params.multi_gpu:
             loss = loss.mean()
         loss_avg.update(loss.item())
         
-        batch_output = model(batch_data, token_type_ids=None, attention_mask=batch_masks)  # shape: (batch_size, max_len, num_labels)
+        # batch_output = model(batch_data, token_type_ids=None, attention_mask=batch_masks)  it will also not work for similar issue
+        
+        batch_output = model(batch_data, token_type_ids=None, attention_mask=batch_masks) # shape: (batch_size, max_len, num_labels)
+        batch_output = batch_output[0]
         
         batch_output = batch_output.detach().cpu().numpy()
         batch_tags = batch_tags.to('cpu').numpy()
@@ -112,9 +120,11 @@ if __name__ == '__main__':
     logging.info("- done.")
 
     # Define the model
-    config_path = os.path.join(args.bert_model_dir, 'bert_config.json')
+    config_path = os.path.join(args.bert_model_dir, 'config.json')
     config = BertConfig.from_json_file(config_path)
-    model = BertForTokenClassification(config, num_labels=len(params.tag2idx))
+    config.update({"num_labels":len(params.tag2idx)})
+    model = BertForTokenClassification(config)
+    # model = BertForTokenClassification(config, num_labels=len(params.tag2idx))
 
     model.to(params.device)
     # Reload weights from the saved file
