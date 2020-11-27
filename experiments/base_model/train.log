@@ -1,57 +1,28 @@
-2020-11-22 10:13:02,267:INFO: device: cuda, n_gpu: 1, 16-bits training: False
-2020-11-22 10:13:02,268:INFO: Loading the datasets...
-2020-11-22 10:13:02,268:INFO: Lock 139767099573136 acquired on /root/.cache/torch/transformers/7fb0534b83c42daee7d3ddb0ebaa81387925b71665d6ea195c5447f1077454cd.eea60d9ebb03c75bb36302aa9d241d3b7a04bba39c360cf035e8bf8140816233.lock
-2020-11-22 10:13:02,268:INFO: Lock 139767099573136 released on /root/.cache/torch/transformers/7fb0534b83c42daee7d3ddb0ebaa81387925b71665d6ea195c5447f1077454cd.eea60d9ebb03c75bb36302aa9d241d3b7a04bba39c360cf035e8bf8140816233.lock
-2020-11-22 10:13:02,268:INFO: Lock 140000068006800 acquired on /root/.cache/torch/transformers/45c3f7a79a80e1cf0a489e5c62b43f173c15db47864303a55d623bb3c96f72a5.d789d64ebfe299b0e416afc4a169632f903f693095b4629a7ea271d5a0cf2c99.lock
-2020-11-22 10:13:02,268:INFO: Lock 140000068006800 released on /root/.cache/torch/transformers/45c3f7a79a80e1cf0a489e5c62b43f173c15db47864303a55d623bb3c96f72a5.d789d64ebfe299b0e416afc4a169632f903f693095b4629a7ea271d5a0cf2c99.lock
-2020-11-22 10:13:02,268:INFO: Lock 139998799371568 acquired on /root/.cache/torch/transformers/3c61d016573b14f7f008c02c4e51a366c67ab274726fe2910691e2a761acf43e.637c6035640bacb831febcc2b7f7bee0a96f9b30c2d7e9ef84082d9f252f3170.lock
-2020-11-22 10:13:02,268:INFO: Lock 139998799371568 released on /root/.cache/torch/transformers/3c61d016573b14f7f008c02c4e51a366c67ab274726fe2910691e2a761acf43e.637c6035640bacb831febcc2b7f7bee0a96f9b30c2d7e9ef84082d9f252f3170.lock
-2020-11-22 10:13:02,268:INFO: Lock 139998778834560 acquired on /root/.cache/torch/transformers/a8041bf617d7f94ea26d15e218abd04afc2004805632abc0ed2066aa16d50d04.faf6ea826ae9c5867d12b22257f9877e6b8367890837bd60f7c54a29633f7f2f.lock
-2020-11-22 10:13:02,268:INFO: Lock 139998778834560 released on /root/.cache/torch/transformers/a8041bf617d7f94ea26d15e218abd04afc2004805632abc0ed2066aa16d50d04.faf6ea826ae9c5867d12b22257f9877e6b8367890837bd60f7c54a29633f7f2f.lock
-2020-11-22 10:13:24,410:INFO: Starting training for 20 epoch(s)
-2020-11-22 10:13:24,410:INFO: Epoch 1/20
-2020-11-22 10:13:48,056:INFO: - Train metrics: loss: 00.25; f1: 33.88
-2020-11-22 10:13:50,396:INFO: - Val metrics: loss: 00.37; f1: 26.42
-2020-11-22 10:14:30,427:INFO: - Found new best F1
-2020-11-22 10:14:30,428:INFO: Epoch 2/20
-2020-11-22 10:14:55,905:INFO: - Train metrics: loss: 00.14; f1: 47.05
-2020-11-22 10:14:58,405:INFO: - Val metrics: loss: 00.35; f1: 29.81
-2020-11-22 10:15:39,021:INFO: - Found new best F1
-2020-11-22 10:15:39,021:INFO: Epoch 3/20
-2020-11-22 10:16:04,250:INFO: - Train metrics: loss: 00.10; f1: 55.32
-2020-11-22 10:16:06,732:INFO: - Val metrics: loss: 00.45; f1: 30.67
-2020-11-22 10:16:47,086:INFO: - Found new best F1
-2020-11-22 10:16:47,121:INFO: Epoch 4/20
-2020-11-22 10:17:12,361:INFO: - Train metrics: loss: 00.05; f1: 64.03
-2020-11-22 10:17:14,854:INFO: - Val metrics: loss: 00.41; f1: 31.57
-2020-11-22 10:17:55,593:INFO: - Found new best F1
-2020-11-22 10:17:55,642:INFO: Epoch 5/20
-2020-11-22 10:18:21,010:INFO: - Train metrics: loss: 00.04; f1: 66.23
-2020-11-22 10:18:23,511:INFO: - Val metrics: loss: 00.42; f1: 32.03
-2020-11-22 10:19:04,552:INFO: - Found new best F1
-2020-11-22 10:19:04,552:INFO: Epoch 6/20
-2020-11-22 10:19:29,865:INFO: - Train metrics: loss: 00.03; f1: 69.92
-2020-11-22 10:19:32,393:INFO: - Val metrics: loss: 00.60; f1: 33.58
-2020-11-22 10:20:16,726:INFO: - Found new best F1
-2020-11-22 10:20:16,726:INFO: Epoch 7/20
-2020-11-22 10:20:42,192:INFO: - Train metrics: loss: 00.02; f1: 72.01
-2020-11-22 10:20:44,707:INFO: - Val metrics: loss: 00.64; f1: 33.76
-2020-11-22 10:21:26,400:INFO: - Found new best F1
-2020-11-22 10:21:26,401:INFO: Epoch 8/20
-2020-11-22 10:21:51,777:INFO: - Train metrics: loss: 00.01; f1: 72.96
-2020-11-22 10:21:54,306:INFO: - Val metrics: loss: 00.57; f1: 34.73
-2020-11-22 10:22:35,684:INFO: - Found new best F1
-2020-11-22 10:22:35,685:INFO: Epoch 9/20
-2020-11-22 10:23:00,992:INFO: - Train metrics: loss: 00.01; f1: 73.32
-2020-11-22 10:23:03,531:INFO: - Val metrics: loss: 00.62; f1: 35.06
-2020-11-22 10:23:45,834:INFO: - Found new best F1
-2020-11-22 10:23:45,835:INFO: Epoch 10/20
-2020-11-22 10:24:11,112:INFO: - Train metrics: loss: 00.01; f1: 72.98
-2020-11-22 10:24:13,655:INFO: - Val metrics: loss: 00.65; f1: 33.23
-2020-11-22 10:24:21,128:INFO: Epoch 11/20
-2020-11-22 10:24:46,486:INFO: - Train metrics: loss: 00.00; f1: 74.01
-2020-11-22 10:24:49,056:INFO: - Val metrics: loss: 00.71; f1: 35.04
-2020-11-22 10:24:55,499:INFO: Epoch 12/20
-2020-11-22 10:25:21,110:INFO: - Train metrics: loss: 00.00; f1: 74.03
-2020-11-22 10:25:23,686:INFO: - Val metrics: loss: 00.74; f1: 34.98
-2020-11-22 10:25:30,032:INFO: Best val f1: 35.06
+2020-11-27 10:02:08,374:INFO: device: cuda, n_gpu: 1, 16-bits training: False
+2020-11-27 10:02:08,374:INFO: Loading the datasets...
+2020-11-27 10:02:25,327:INFO: Starting training for 20 epoch(s)
+2020-11-27 10:02:25,327:INFO: Epoch 1/20
+2020-11-27 10:02:48,656:INFO: - Train metrics: loss: 00.25; f1: 00.34
+2020-11-27 10:02:51,002:INFO: - Val metrics: loss: 00.37; f1: 00.26
+2020-11-27 10:03:24,711:INFO: - Found new best F1
+2020-11-27 10:03:29,048:INFO: Epoch 2/20
+2020-11-27 10:03:53,086:INFO: - Train metrics: loss: 00.14; f1: 00.47
+2020-11-27 10:03:55,487:INFO: - Val metrics: loss: 00.35; f1: 00.30
+2020-11-27 10:04:29,392:INFO: - Found new best F1
+2020-11-27 10:04:29,994:INFO: Epoch 3/20
+2020-11-27 10:04:54,732:INFO: - Train metrics: loss: 00.10; f1: 00.55
+2020-11-27 10:04:57,271:INFO: - Val metrics: loss: 00.45; f1: 00.31
+2020-11-27 10:05:34,730:INFO: - Found new best F1
+2020-11-27 10:05:34,751:INFO: Epoch 4/20
+2020-11-27 10:06:00,122:INFO: - Train metrics: loss: 00.05; f1: 00.64
+2020-11-27 10:06:02,748:INFO: - Val metrics: loss: 00.41; f1: 00.32
+2020-11-27 10:06:39,132:INFO: - Found new best F1
+2020-11-27 10:06:41,616:INFO: Epoch 5/20
+2020-11-27 10:07:07,710:INFO: - Train metrics: loss: 00.04; f1: 00.66
+2020-11-27 10:07:10,482:INFO: - Val metrics: loss: 00.42; f1: 00.32
+2020-11-27 10:07:47,683:INFO: - Found new best F1
+2020-11-27 10:07:47,743:INFO: Epoch 6/20
+2020-11-27 10:08:14,570:INFO: - Train metrics: loss: 00.03; f1: 00.70
+2020-11-27 10:08:17,437:INFO: - Val metrics: loss: 00.60; f1: 00.34
+2020-11-27 10:08:53,811:INFO: - Found new best F1
+2020-11-27 10:08:53,853:INFO: Best val f1: 00.34

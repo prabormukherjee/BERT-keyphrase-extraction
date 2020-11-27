@@ -19,9 +19,9 @@ from data_loader import DataLoader
 import utils
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--data_dir', default='./drive/My Drive/Colab Notebooks/BERT-keyphrase-extraction/data/msra/', help="Directory containing the dataset")
-parser.add_argument('--bert_model_dir', default='bert-base-chinese', help="Directory containing the BERT model in PyTorch")
-parser.add_argument('--model_dir', default='./drive/My Drive/Colab Notebooks/BERT-keyphrase-extraction/experiments/base_model', help="Directory containing params.json")
+parser.add_argument('--data_dir', default='./BERT-keyphrase-extraction/data/task1/', help="Directory containing the dataset")
+parser.add_argument('--bert_model_dir', default='bert-base-uncased', help="Directory containing the BERT model in PyTorch")
+parser.add_argument('--model_dir', default='./BERT-keyphrase-extraction/experiments/base_model', help="Directory containing params.json")
 parser.add_argument('--seed', type=int, default=23, help="random seed for initialization")
 parser.add_argument('--restore_file', default='best', help="name of the file in `model_dir` containing weights to load")
 parser.add_argument('--multi_gpu', default=False, action='store_true', help="Whether to use multiple GPUs if available")
@@ -46,7 +46,7 @@ def evaluate(model, data_iterator, params, mark='Test', verbose=False):
         batch_data, batch_tags = next(data_iterator)
         batch_masks = batch_data.gt(0)
 
-        # loss = mmodel(batch_data, token_type_ids=None, attention_mask=batch_masks, labels=batch_tags) it will not work anymore, here is the issue: https://github.com/huggingface/transformers/issues/82
+        # loss = model(batch_data, token_type_ids=None, attention_mask=batch_masks, labels=batch_tags) it will not work anymore, here is the issue: https://github.com/huggingface/transformers/issues/82
         
         loss = model(batch_data, token_type_ids=None, attention_mask=batch_masks, labels=batch_tags)
         loss = loss[0]
@@ -120,9 +120,12 @@ if __name__ == '__main__':
     logging.info("- done.")
 
     # Define the model
-    config_path = os.path.join(args.bert_model_dir, 'config.json')
+    # config_path = os.path.join(args.bert_model_dir, 'config.json')
+    config_path = os.path.join('./BERT-keyphrase-extraction', 'config.json')
     config = BertConfig.from_json_file(config_path)
-    config.update({"num_labels":len(params.tag2idx)})
+
+    #update config with num_labels
+    config.update({"num_labels":2})
     model = BertForTokenClassification(config)
     # model = BertForTokenClassification(config, num_labels=len(params.tag2idx))
 
@@ -137,3 +140,4 @@ if __name__ == '__main__':
     logging.info("Starting evaluation...")
     test_metrics = evaluate(model, test_data_iterator, params, mark='Test', verbose=True)
 
+    

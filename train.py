@@ -21,9 +21,9 @@ import utils
 
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--data_dir', default='./drive/My Drive/Colab Notebooks/BERT-keyphrase-extraction/data/task1', help="Directory containing the dataset")
+parser.add_argument('--data_dir', default='./BERT-keyphrase-extraction/data/task1', help="Directory containing the dataset")
 parser.add_argument('--bert_model_dir', default='bert-base-uncased', help="Directory containing the BERT model in PyTorch")
-parser.add_argument('--model_dir', default='./drive/My Drive/Colab Notebooks/BERT-keyphrase-extraction/experiments/base_model', help="Directory containing params.json")
+parser.add_argument('--model_dir', default='./BERT-keyphrase-extraction/experiments/base_model', help="Directory containing params.json")
 parser.add_argument('--seed', type=int, default=2019, help="random seed for initialization")
 parser.add_argument('--restore_file', default=None,
                     help="Optional, name of the file in --model_dir containing weights to reload before training")

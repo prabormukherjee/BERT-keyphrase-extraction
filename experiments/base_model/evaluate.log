@@ -1,1 +1,10 @@
-2020-11-22 10:13:02,268:INFO: Loading the dataset...
+2020-11-27 10:08:58,615:INFO: Loading the dataset...
+2020-11-27 10:08:58,947:INFO: - done.
+2020-11-27 10:09:08,108:INFO: Starting evaluation...
+2020-11-27 10:09:10,776:INFO: - Test metrics: loss: 00.60; f1: 00.34
+2020-11-27 10:09:10,814:INFO:              precision    recall  f1-score   support
+
+          I       0.27      0.45      0.34       921
+
+avg / total       0.27      0.45      0.34       921
+
