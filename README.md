@@ -4,7 +4,7 @@ Deep Keyphrase extraction using BERT.
 
 ## Usage
 
-**It takes a lot of computational power to work correctly. I keep the file in a way that only can work in colab environment**    
+**It takes a lot of computational power to work correctly. I kept the file in a way that only can work in colab environment**    
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1lMAZXUi3IzrFcG5f-HZCu0AACWVXGC0A?usp=sharing)    
 [![Open In Drive](https://img.shields.io/badge/googledrive-Open%20in%20Drive-yellowgreen)](https://drive.google.com/drive/folders/1SfK8YJ1mPyBt0Hz61vOqzMnAmvdnheg-?usp=sharing)    
