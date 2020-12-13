@@ -54,8 +54,10 @@ def train(model, data_iterator, optimizer, scheduler, params):
         # compute model output and loss
         
         # loss = model(batch_data, token_type_ids=None, attention_mask=batch_masks, labels=batch_tags) it will not work anymore, here is the issue: https://github.com/huggingface/transformers/issues/82
+        # loss, _ = model(batch_data, token_type_ids=None, attention_mask=batch_masks, labels=batch_tags)
         
-        loss, _ = model(batch_data, token_type_ids=None, attention_mask=batch_masks, labels=batch_tags)
+        loss = model(batch_data, token_type_ids=None, attention_mask=batch_masks, labels=batch_tags)
+        loss = loss [0]
 
         if params.n_gpu > 1 and args.multi_gpu:
             loss = loss.mean()  # mean() to average on multi-gpu
